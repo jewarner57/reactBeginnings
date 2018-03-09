@@ -28,16 +28,36 @@
 }
 
 .decoration {
-    color:green;
+    font-weight: bold;
 }
 
 .none {
-    color:red;
+    font-weight: 100;
 }
-
-
 
 .button {
     width: 150px;
     height: 50px;
+}
+
+.textArea {
+    margin: 50px;
+    resize: none;
+}
+
+.enterText {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.enterText input {
+    width:50%;
+    margin-left: auto;
+    margin-right:auto;
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Note from './Note';
 import logo from './logo.svg';
 import './App.css';
 
@@ -11,43 +12,10 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         
-        <Note name="Name"/>
+        <Note/>
+        
       </div>
     );
   }
 }
-
-class Note extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {started: true};
-        this.change = this.change.bind(this);
-    } 
-    
-    change() {
-        this.setState({started: !this.state.started});
-    }
-    
-    render() {
-        
-        var display = "decoration";
-        
-        if(this.state.started) {
-            display = "decoration";
-        }
-        else {
-            display = "none";
-        }
-        
-        return (
-            <div>
-                <h1 className = {display} >Hello, {this.props.name}</h1>
-                <button className="button" onClick={this.change} />
-            </div>
-        )
-    }
-}
-
-
 export default App;
