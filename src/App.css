@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 100px;
   padding: 20px;
   color: white;
 }
@@ -38,6 +38,7 @@
 .button {
     width: 150px;
     height: 50px;
+    margin:10px;
 }
 
 .textArea {
@@ -50,14 +51,18 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
-    
     width:50%;
     margin-left:auto;
     margin-right:auto;
 }
 
-.enterText input {
+.submitButton {
     width:50%;
+    margin-bottom: 20px;
     margin-left: auto;
     margin-right:auto;
+}
+
+.listCheck {
+    height: 25px;
 }
