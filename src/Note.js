@@ -35,14 +35,14 @@ export default class Note extends React.Component {
             
             if(tempArray[i].checked == true) {
                 
-                if(tempArray[i].decoration == "none") {
+                if(tempArray[i].decoration == "none" || tempArray[i].decoration == "noneReset") {
                     
                     tempArray[i].decoration = "decoration";
                     
                 }
                 else {
                     
-                    tempArray[i].decoration = "none";
+                    tempArray[i].decoration = "noneReset";
                     
                 }
                 

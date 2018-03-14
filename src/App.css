@@ -3,8 +3,7 @@
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  animation: App-logo-spin infinite 5s ease;
 }
 
 .App-header {
@@ -23,15 +22,35 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); width: 80px; margin-top:22px;}
+  50% { transform: rotate(180deg); width: 120px; margin-top:8px;}
+  100% { transform: rotate(360deg); width: 80px; margin-top:22px;}
+}
+
+@keyframes addNote {
+    0% {margin-left: 1000px; margin-right: 0px;}
+    90% {margin-left:0px; margin-right: 20px;}
+    100% {margin-left:0px; margin-right: 0px;}
+}
+
+@keyframes addDecoration {
+    0% {color:black; font-weight: 100; }
+    100% {color: #cb1111; font-weight: bold;}
 }
 
 .decoration {
-    font-weight: bold;
+    color: #cb1111;
+    animation: addDecoration linear;
+    animation-duration: 0.5s;
 }
 
 .none {
+    font-weight: 100;
+    animation: addNote ease-in;
+    animation-duration: 1s;
+}
+
+.noneReset {
     font-weight: 100;
 }
 
