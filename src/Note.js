@@ -1,5 +1,8 @@
 
 import React, { Component } from 'react';
+import Button from './Button';
+import ToDoItem from './ToDoItem';
+import ToDoItemList from './ToDoItemList';
 
 export default class Note extends React.Component {
     
@@ -10,98 +13,97 @@ export default class Note extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.valChanged = this.valChanged.bind(this); 
         this.checked = this.checked.bind(this);
-        this.removeSelectedEntries = this.removeSelectedEntries.bind(this);
+        this.removeSelectedToDoItem = this.removeSelectedToDoItem.bind(this);
         
-        const entries = [];
+        const toDoItem = [];
         
         
-        entries.push({
+        toDoItem.push({
             
             id: 1,
-            text: "Text",
+            displayedText: "Text",
             checked: false,
-            decoration: "none"
+            textDecoration: "none"
             
         })
         
-        this.state = {textVal: "Enter Text Then Press Submit", currentTextVal: "Text Appears Here", entries: [], count: 1};
+        this.state = {textValue: "Enter Text Then Press Submit", toDoItem: [], toDoItemCount: 1};
     } 
     
     changeColor() {
         
-        var tempArray = [...this.state.entries];
+        const toDoItemArray = [...this.state.toDoItem];
         
-        for(var i = 0; i < tempArray.length; i++) {
+        for(let i = 0; i < toDoItemArray.length; i++) {
             
-            if(tempArray[i].checked == true) {
+            if(toDoItemArray[i].checked == true) {
                 
-                if(tempArray[i].decoration == "none" || tempArray[i].decoration == "noneReset") {
+                if(toDoItemArray[i].textDecoration == "none" || toDoItemArray[i].textDecoration == "noneReset") {
                     
-                    tempArray[i].decoration = "decoration";
+                    toDoItemArray[i].textDecoration = "bold";
                     
                 }
                 else {
                     
-                    tempArray[i].decoration = "noneReset";
+                    toDoItemArray[i].textDecoration = "noneReset";
                     
                 }
                 
-                tempArray[i].checked = false;
+                toDoItemArray[i].checked = false;
                 
             }
             
         }
         
-        this.setState({entries: tempArray})
+        this.setState({toDoItem: toDoItemArray})
     }
     
     onSubmit(event) {
         
-        const array = [...this.state.entries];
-        const countTemp = this.state.count+=5;
-        this.setState({count: countTemp});
-        
-        const textTemp = this.state.textVal;
-        this.setState({currentTextVal: textTemp})
+        const toDoItemArray = [...this.state.toDoItem];
+        const toDoItemIDCounter = this.state.toDoItemCount + 1;
+        this.setState({toDoItemCount: toDoItemIDCounter});
+        const textValue = this.state.textValue;
         
         
-        array.push({
+        toDoItemArray.push({
             
-            id: this.state.count,
-            text: textTemp,
+            id: this.state.toDoItemCount,
+            displayedText: textValue,
             checked: false,
-            decoration: "none"
+            textDecoration: "none"
             
         })
         
-        this.setState({entries: array});
+        this.setState({toDoItem: toDoItemArray, currentTextVal: textValue, toDoItemCount: this.state.toDoItemCount+1});
         event.preventDefault();
     }
     
     valChanged(event) {
-        this.setState({textVal: event.target.value});
+        this.setState({textValue: event.target.value});
     }
     
     checked(event) {
-        var array = [...this.state.entries];
-        array[event.target.id].checked = event.target.checked;
+        let toDoItemArray = [...this.state.toDoItem];
         
-        this.setState({entries: array});
+        toDoItemArray[event.target.id].checked = event.target.checked;
+        
+        this.setState({toDoItem: toDoItemArray});
     }
     
-    removeSelectedEntries() {
-        var array = [...this.state.entries];
-        var tempArray = [];
+    removeSelectedToDoItem() {
+        const currentToDoItem = [...this.state.toDoItem];
+        let newToDoItemList = [];
         
-        for(var i = 0; i < array.length; i++) {
+        for(let i = 0; i < currentToDoItem.length; i++) {
             
-            if(array[i].checked == false) {
-                tempArray.push(array[i]);
+            if(currentToDoItem[i].checked == false) {
+                newToDoItemList.push(currentToDoItem[i]);
             }
             
         }
         
-        this.setState({entries: tempArray})
+        this.setState({toDoItem: newToDoItemList})
         
     }
     
@@ -110,24 +112,17 @@ export default class Note extends React.Component {
             <div>
                 <div className ="enterText">
                     <form onSubmit={this.onSubmit}>
-                        <textarea rows="8" cols="50" className="textArea" value={this.state.textVal} onChange={this.valChanged} >Test Value</textarea>
+                        <textarea rows="8" cols="50" className="textArea" placeholder={this.state.textValue} onChange={this.valChanged} ></textarea>
                         <input type="Submit" value="Submit" className="submitButton"/> 
                     </form>
                 </div>
                 <div>
-                    {this.state.entries.map((entry, index) => (
-            
-                        <div className = "listItem">
-            
-                            <h1><label className = {entry.decoration} id={entry.id}> {entry.text} <input type="checkbox" className="listCheck" id={index} onChange={this.checked} checked={entry.checked}/></label></h1>          
-                            
-                        </div>
-            
-                    ))}
-                    <button className="button" onClick={this.changeColor} >Bold</button>     
-                    <button className="button" onClick={this.removeSelectedEntries} >Delete</button>
-                    
+                    <ToDoItemList toDoItem = {this.state.toDoItem} changed={this.checked}> </ToDoItemList>
                 </div>
+                
+                    <Button buttonClicked={this.changeColor} title = {'Bold'}></Button>    
+                    <Button buttonClicked={this.removeSelectedToDoItem} title = {'Delete'}></Button>    
+                    
             </div>
         )
     }

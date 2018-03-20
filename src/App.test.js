@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import Note from './Note';
+import Button from './Button';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');

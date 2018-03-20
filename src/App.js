@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Note from './Note';
+import Button from './Button';
 import logo from './logo.svg';
 import './App.css';
 
